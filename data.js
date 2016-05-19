@@ -6983,7 +6983,7 @@ var data_node_positions = [
 {'nodeId': 35, 'instrumentId': 34, 'qty': 0},
 {'nodeId': 32, 'instrumentId': 34, 'qty': 0},
 {'nodeId': 33, 'instrumentId': 34, 'qty': 0},
-{'nodeId': 38, 'instrumentId': 34, 'qty': 0},
+{'nodeId': 38, 'instrumentId': 34, 'qty': 	0},
 {'nodeId': 39, 'instrumentId': 34, 'qty': 0},
 {'nodeId': 36, 'instrumentId': 34, 'qty': 0},
 {'nodeId': 37, 'instrumentId': 34, 'qty': 0},
@@ -13530,5 +13530,4 @@ var data_edge_cost = [
 {'edgeId': 83, 'instrumentId': 63, 'cost': 2},
 {'edgeId': 82, 'instrumentId': 63, 'cost': 2},
 ];
-
 
