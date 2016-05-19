@@ -15,10 +15,21 @@ var nodeRadius = 20;
 function main() {
 
 
+    var graphNodes = [];
+    var graphEdges = [];
 
-    console.log(data_nodes);
 
-	// create an array with nodes
+    for(node in data_nodes){
+        graphNodes.push({id: node.id, label: node.name, group: 'nodes'});
+    }
+
+    for(edges in data_edges){
+        graphEdges.push({from: edges.fromNodeId, to: edges.toNodeId }); 
+    }
+
+
+
+	// create an array with node
     // var nodes = new vis.DataSet([
     //   {id: 1, label: 'Node 1'},
     //   {id: 2, label: 'Node 2'},
@@ -35,14 +46,14 @@ function main() {
     //   {from: 2, to: 5}
     // ]);
 
-    // // create a network
-    // var container = document.getElementById('mynetwork');
-    // var data = {
-    //   nodes: nodes,
-    //   edges: edges
-    // };
-    // var options = {};
-    // var network = new vis.Network(container, data, options);
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: graphNodes,
+      edges: graphEdges
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
 
 }
 
