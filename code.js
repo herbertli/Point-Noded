@@ -19,13 +19,16 @@ function main() {
     var graphEdges = [];
 
 
-    for(node in data_nodes){
-        graphNodes.push({id: node.id, label: node.name, group: 'nodes'});
+    for(i=0;i<data_nodes.length;i++){
+        graphNodes.push({id: data_nodes[i].id, label: data_nodes[i].name, group: 'nodes'});
     }
 
-    for(edges in data_edges){
-        graphEdges.push({from: edges.fromNodeId, to: edges.toNodeId }); 
+    for(i=0;i<data_edges.length;i++){
+        graphEdges.push({from: data_edges[i].fromNodeId, to: data_edges[i].toNodeId });
     }
+
+    console.log(graphNodes);
+    console.log(graphEdges);
 
 
 
