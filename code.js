@@ -22,26 +22,45 @@ function main() {
             id: data_nodes[i].id,
             label: data_nodes[i].name,
             group: 'nodes',
-            instrumentList: []
+            instrumentList: [],
+            val: 0
         });
     }
 
     for(i = 0; i < data_node_positions.length; i++){
-        if(data_node_positions[i].qty != 0){
-            (graphNodes.find(x=> x.id  === data_node_positions[i].nodeId)).instrumentList[data_node_positions[i].instrumentId]=data_node_positions[i].qty;
-        }
+        (graphNodes.find(x=> x.id  === data_node_positions[i].nodeId)).instrumentList[data_node_positions[i].instrumentId]=data_node_positions[i].qty;
     }
-
-    console.log(graphNodes); 
 
     for(i=0;i<data_edges.length;i++){
         graphEdges.push({
             from: data_edges[i].fromNodeId,
             to: data_edges[i].toNodeId,
             arrows: 'to',
-            id: data_edges[i].id
+            id: data_edges[i].id,
+            instrumentList: []
         });
     }
+
+    for(i = 0; i < data_edge_positions.length; i++){
+        (graphEdges.find(x=> x.id  === data_edge_positions[i].edgeId)).instrumentList[data_edge_positions[i].instrumentId]=data_edge_positions[i].qty;
+    }
+
+    var instruments = [];
+    for(i = 0; i < data_instruments.length; i++){
+        instruments[data_instruments[i].id] = {
+            id: data_instruments[i].id,
+            price: data_instruments[i].price
+        }
+    }
+
+    for(i = 0; i < graphNodes.length; i++){
+        for(k = 0; k < graphNodes[i].instrumentList.length; k++){
+            
+            graphNodes[i].val+=(graphNodes[i].instrumentList[k] * instruments[k].price);
+        }
+    }
+
+    console.log(graphNodes);
 
     // create a network
     var container = document.getElementById('mynetwork');
