@@ -21,7 +21,6 @@ function main() {
         graphNodes.push({
             id: data_nodes[i].id,
             label: data_nodes[i].name,
-            group: 'nodes',
             instrumentList: [],
             val: 0
         });
@@ -37,7 +36,8 @@ function main() {
             to: data_edges[i].toNodeId,
             arrows: 'to',
             id: data_edges[i].id,
-            instrumentList: []
+            instrumentList: [],
+            label: 0
         });
     }
 
@@ -55,12 +55,16 @@ function main() {
 
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
-            
             graphNodes[i].val+=(graphNodes[i].instrumentList[k] * instruments[k].price);
         }
     }
 
-    console.log(graphNodes);
+    for(i = 0; i < graphEdges.length; i++){
+        for(k = 0; k < graphEdges[i].instrumentList.length; k++){
+            graphEdges[i].label+=(graphEdges[i].instrumentList[k] * instruments[k].price);
+        }
+    }
+
 
     // create a network
     var container = document.getElementById('mynetwork');
