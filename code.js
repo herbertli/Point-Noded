@@ -7,8 +7,6 @@ var height = 500;
 var linkDistance = 200;
 var nodeRadius = 20;
 
-
-
 /**
 * Main function
 */
@@ -37,7 +35,10 @@ function main() {
             arrows: 'to',
             id: data_edges[i].id,
             instrumentList: [],
-            label: 0
+            label: 0,
+            font: {
+                align: 'middle',
+            }
         });
     }
 
@@ -65,6 +66,29 @@ function main() {
         }
     }
 
+    var min_node = Infinity;
+    var min_edge = Infinity;
+    var max_node = -Infinity;
+    var max_edge = -Infinity;
+
+    for(i = 0; i < graphNodes.length; i++) {
+        if (graphNodes[i].val < min_node)
+            min_node = graphNodes[i].val
+        else if (graphNodes[i].val > max_node)
+            max_node = graphNodes[i].val
+    }
+
+    for(i = 0; i < graphEdges.length; i++) {
+        if (graphEdges[i].label < min_edge)
+            min_edge = graphEdges[i].label
+        else if (graphEdges[i].label > max_edge)
+            max_edge = graphEdges[i].label
+    }
+
+    console.log(min_node);
+    console.log(min_edge);
+    console.log(max_node);
+    console.log(max_edge);
 
     // create a network
     var container = document.getElementById('mynetwork');
@@ -72,28 +96,24 @@ function main() {
       nodes: graphNodes,
       edges: graphEdges
     };
-    var options = {};
+    var options = {
+        edges:{
+              scaling: {
+                min: min_node,
+                max: max_node,
+                customScalingFunction: function (min,max,total,value) {
+                  if (max === min) {
+                    return 0.5;
+                  }
+                  else {
+                    let scale = 1 / (max - min);
+                    return Math.max(0,(value - min)*scale);
+                  }
+                }
+              },
+            }
+    }
+
     var network = new vis.Network(container, data, options);
 
-}
-
-
-/**
-* Create json with graph.
-* Replace this with the real data.
-*/
-function loadGraph() {
-	var graph = {
-		"nodes" :[
-			{"name": "Node1", "group":1},
-			{"name": "Node2", "group":2},
-			{"name": "Node3", "group":3}
-		],
-		"links":[
-			{"source":0, "target":1, "value":1},
-			{"source":0, "target":2, "value":1},
-		]
-	};
-
-	return graph;
 }
