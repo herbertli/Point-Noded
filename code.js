@@ -55,8 +55,7 @@ function main() {
 
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
-            
-            graphNodes[i].val+=(graphNodes[i].instrumentList[k] * instruments[k].price);
+            graphNodes[i].val= graphNodes[i].val + (graphNodes[i].instrumentList[k] * instruments[k].price); 
         }
     }
 
