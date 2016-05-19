@@ -21,9 +21,18 @@ function main() {
         graphNodes.push({
             id: data_nodes[i].id,
             label: data_nodes[i].name,
-            group: 'nodes'
+            group: 'nodes',
+            instrumentList: []
         });
     }
+
+    for(i = 0; i < data_node_positions.length; i++){
+        if(data_node_positions[i].qty != 0){
+            (graphNodes.find(x=> x.id  === data_node_positions[i].nodeId)).instrumentList[data_node_positions[i].instrumentId]=data_node_positions[i].qty;
+        }
+    }
+
+    console.log(graphNodes); 
 
     for(i=0;i<data_edges.length;i++){
         graphEdges.push({
