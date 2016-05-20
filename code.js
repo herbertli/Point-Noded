@@ -20,7 +20,8 @@ function main() {
             id: data_nodes[i].id,
             label: data_nodes[i].name,
             instrumentList: [],
-            val: 0
+            val: round(0.00, 2), 
+            title: 'hi'
         });
     }
 
@@ -35,10 +36,11 @@ function main() {
             arrows: 'to',
             id: data_edges[i].id,
             instrumentList: [],
-            label: 0,
+            val: round(0.00, 2),
             font: {
                 align: 'middle',
-            }
+            },
+            title: 'hi'
         });
     }
 
@@ -56,13 +58,13 @@ function main() {
 
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
-            graphNodes[i].val+=(graphNodes[i].instrumentList[k] * instruments[k].price);
+            graphNodes[i].val+=round((graphNodes[i].instrumentList[k] * instruments[k].price),2);
         }
     }
 
     for(i = 0; i < graphEdges.length; i++){
         for(k = 0; k < graphEdges[i].instrumentList.length; k++){
-            graphEdges[i].label+=(graphEdges[i].instrumentList[k] * instruments[k].price);
+            graphEdges[i].val+=round((graphEdges[i].instrumentList[k] * instruments[k].price),2);  
         }
     }
 
@@ -79,16 +81,24 @@ function main() {
     }
 
     for(i = 0; i < graphEdges.length; i++) {
-        if (graphEdges[i].label < min_edge)
-            min_edge = graphEdges[i].label
-        else if (graphEdges[i].label > max_edge)
-            max_edge = graphEdges[i].label
+        if (graphEdges[i].val < min_edge)
+            min_edge = graphEdges[i].val
+        else if (graphEdges[i].val > max_edge)
+            max_edge = graphEdges[i].val
     }
 
     console.log(min_node);
     console.log(min_edge);
     console.log(max_node);
     console.log(max_edge);
+
+    for( i =0; i < graphNodes.length; i++){
+        graphNodes[i].title =  graphNodes[i].val;
+    }
+
+    for( i =0; i < graphNodes.length; i++){
+        graphEdges[i].title =  graphEdges[i].val;
+    }
 
     // create a network
     var container = document.getElementById('mynetwork');
@@ -111,9 +121,20 @@ function main() {
                   }
                 }
               },
-            }
+            },
+
+        interaction: {
+            hover: true, 
+            hoverConnectedEdges: true,
+            tooltipDelay: 10
+        }
     }
 
     var network = new vis.Network(container, data, options);
 
+}
+
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
