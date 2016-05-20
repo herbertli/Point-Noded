@@ -34,7 +34,7 @@ function main() {
             id: data_nodes[i].id,
             instrumentList: [],
             label: data_nodes[i].name,
-            value: round(0.00, 2),
+            value: round(0.00),
             title: '',
         });
     }
@@ -52,7 +52,7 @@ function main() {
             arrows: 'to',
             id: data_edges[i].id,
             instrumentList: [],
-            value: round(0.00, 2),
+            value: round(0.00),
             title: '',
         });
     }
@@ -74,14 +74,14 @@ function main() {
     // Get total value of each node
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
-            graphNodes[i].value+=round((graphNodes[i].instrumentList[k] * instruments[k].price),2);
+            graphNodes[i].value+=round((graphNodes[i].instrumentList[k] * instruments[k].price));
         }
     }
 
     // Get total value of each edge
     for(i = 0; i < graphEdges.length; i++){
         for(k = 0; k < graphEdges[i].instrumentList.length; k++){
-            graphEdges[i].value+=round((graphEdges[i].instrumentList[k] * instruments[k].price),2);
+            graphEdges[i].value+=round((graphEdges[i].instrumentList[k] * instruments[k].price));
         }
     }
 
@@ -108,7 +108,7 @@ function main() {
         graphNodes[i].title =  graphNodes[i].value;
     }
 
-    for( i =0; i < graphNodes.length; i++){
+    for( i =0; i < graphEdges.length; i++){
         graphEdges[i].title =  graphEdges[i].value;
     }
 
@@ -158,6 +158,6 @@ function main() {
 }
 
 
-function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+function round(value) {
+    return Number(Math.round(value*100)/100);
 }
