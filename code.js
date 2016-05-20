@@ -119,7 +119,7 @@ function main() {
 
     for(i = 0; i < graphNodes.length; i++){
         if(graphNodes[i].value == 0){
-            graphNodes[i].hidden = true; 
+            graphNodes[i].hidden = true;
         }
     }
 
@@ -162,12 +162,24 @@ function main() {
     };
 
     var network = new vis.Network(container, data, options);
-    network.fit(); 
+    network.fit();
     network.on("click", function (params) {
         params.event = "[original event]";
-        document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
+        id = params.nodes[0]
+        n = (graphNodes.find(x=> x.id  === id));
+        console.log(id);
+        console.log(n);
+        console.log(n.lable);
+
+        print_info = {id: id,
+                      name: n.lable,
+                      instrumentList:n.instrumentList
+                    }
+
+        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + JSON.stringify(print_info, null, 4);
     });
 }
+
 
 
 function round(value) {
