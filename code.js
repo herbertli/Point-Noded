@@ -151,18 +151,9 @@ function main() {
     };
 
     var network = new vis.Network(container, data, options);
-    // add event listeners
-    network.on('select', function(params) {
-        document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
-    });
-
     network.on("click", function (params) {
         params.event = "[original event]";
         document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
-    });
-
-    network.on("zoom", function (params) {
-        document.getElementById('eventSpan').innerHTML = '<h2>zoom event:</h2>' + JSON.stringify(params, null, 4);
     });
 }
 
