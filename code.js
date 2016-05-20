@@ -22,6 +22,8 @@ function main() {
             instrumentList: [],
             value: 0,
             label: data_nodes[i].name,
+            val: round(0.00, 2),
+            title: 'hi'
         });
     }
 
@@ -38,10 +40,11 @@ function main() {
             arrows: 'to',
             id: data_edges[i].id,
             instrumentList: [],
-            label: 0,
+            val: round(0.00, 2),
             font: {
                 align: 'middle',
-            }
+            },
+            title: 'hi'
         });
     }
 
@@ -63,13 +66,14 @@ function main() {
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
             graphNodes[i].value+=(graphNodes[i].instrumentList[k] * instruments[k].price);
+            graphNodes[i].val+=round((graphNodes[i].instrumentList[k] * instruments[k].price),2);
         }
     }
 
     // Get total value of each edge
     for(i = 0; i < graphEdges.length; i++){
         for(k = 0; k < graphEdges[i].instrumentList.length; k++){
-            graphEdges[i].label+=(graphEdges[i].instrumentList[k] * instruments[k].price);
+            graphEdges[i].val+=round((graphEdges[i].instrumentList[k] * instruments[k].price),2);
         }
     }
 
@@ -92,7 +96,15 @@ function main() {
             max_edge = graphEdges[i].value;
     }
 
-    // Create a network
+    for( i =0; i < graphNodes.length; i++){
+        graphNodes[i].title =  graphNodes[i].val;
+    }
+
+    for( i =0; i < graphNodes.length; i++){
+        graphEdges[i].title =  graphEdges[i].val;
+    }
+
+    // create a network
     var container = document.getElementById('mynetwork');
     var data = {
       nodes: graphNodes,
@@ -134,10 +146,21 @@ function main() {
                     var scale = 1 / (max - min);
                     return Math.max(0, (value - min)*scale);
                 }
-            }
+              },
+            },
+
+        interaction: {
+            hover: true,
+            hoverConnectedEdges: true,
+            tooltipDelay: 10
         }
     }
 
     var network = new vis.Network(container, data, options);
 
+}
+
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
