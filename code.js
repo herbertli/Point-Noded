@@ -19,6 +19,7 @@ function destroy() {
 }
 
 var zero_hidden = false;
+var group_options = ['hr', 'tech', 'finance'];
 /**
 * Main function
 */
@@ -40,6 +41,7 @@ function main() {
             title: '',
             x: data_nodes[i].x,
             y: data_nodes[i].y,
+            group: group_options[Math.floor(Math.random() * (group_options.length))],
         });
     }
 
@@ -191,6 +193,35 @@ function main() {
         },
         physics: {
             enabled: true,
+        },
+        groups: {
+          tech: {
+            shape: 'icon',
+            icon: {
+              face: 'FontAwesome',
+              code: '\uf108',
+              size: 50,
+              color: '#57169a'
+            }
+          },
+          hr: {
+            shape: 'icon',
+            icon: {
+                face: 'FontAwesome',
+                code: '\uf0c0',
+                size: 50,
+                color: '#002b2b'
+            }
+        },
+          finance: {
+            shape: 'icon',
+            icon: {
+              face: 'FontAwesome',
+              code: '\uf19c',
+              size: 50,
+              color: '#656565'
+            }
+          }
         }
     };
 
