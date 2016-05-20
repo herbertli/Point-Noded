@@ -20,8 +20,7 @@ function main() {
             id: data_nodes[i].id,
             label: data_nodes[i].name,
             instrumentList: [],
-            val: round(0.00, 2), 
-            title: 'hi'
+            val: round(0.00, 2)
         });
     }
 
@@ -39,8 +38,7 @@ function main() {
             val: round(0.00, 2),
             font: {
                 align: 'middle',
-            },
-            title: 'hi'
+            }
         });
     }
 
