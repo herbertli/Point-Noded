@@ -121,11 +121,11 @@ function main() {
 
     var options = {
         interaction: {
-          navigationButtons: true,
-          keyboard: true,
-          hover: true,
-          hoverConnectedEdges: true,
-          tooltipDelay: 10
+            navigationButtons: true,
+           //    keyboard: true,
+            hover: true,
+            hoverConnectedEdges: true,
+            tooltipDelay: 10
         },
         nodes: {
             scaling: {
@@ -149,7 +149,7 @@ function main() {
         edges: {
             arrowStrikethrough: false,
         }
-    }
+    };
 
     var network = new vis.Network(container, data, options);
     // add event listeners
