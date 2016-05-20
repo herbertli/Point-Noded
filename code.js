@@ -178,6 +178,7 @@ function main() {
             },
             shape: 'circle',
             borderWidth: 0,
+            physics: false,
         },
         edges: {
             smooth: {
@@ -186,9 +187,10 @@ function main() {
             },
             arrowStrikethrough: false,
             shadow: false,
+            physics: true,
         },
         physics: {
-            enabled: false,
+            enabled: true,
         }
     };
 
@@ -201,17 +203,19 @@ function main() {
 
         document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>'+"<br" + "Node Id: "+id+"\n"+"Node Name: " + n.name
         +"\n";
-
-        document.getElementById('eventSpan').innerHTML += "Instrument ID\t" + "Quantity"+"\t"+"Price"+"\t\t\t"+"Total"+"\n";
-        total = 0
+        total = 0;
         for(i=0;i<n.instrumentList.length;i++){
           if(n.instrumentList[i]!=0){
-            total += n.instrumentList[i]*instruments[i].price;
-            document.getElementById('eventSpan').innerHTML += i+"\t\t" + n.instrumentList[i] +"\t\t"+instruments[i].price+"\t\t"+n.instrumentList[i]*instruments[i].price+"\n";
+            total += round(n.instrumentList[i]*instruments[i].price);
+            console.log(document.getElementById('mytable'));
+            document.getElementById('mytable').innerHTML =  "<tr>   \
+            <td>" + n.instrumentList[i] + "</td>\
+            <td>" + round(instruments[i].price) + "</td> \
+            <td>"+round(n.instrumentList[i]*instruments[i].price)+"</td> \
+            </tr>";
           }
         }
-
-        document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
+    //    document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
 
 
 
@@ -220,5 +224,5 @@ function main() {
 
 
 function round(value) {
-    return Number(Math.round(value*100)/100);
+    return Math.round(value*100)/100;
 }

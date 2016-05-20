@@ -101,7 +101,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <pre id="eventSpan" style="overflow:scroll"></pre>
+                    <pre id="eventSpan" style="overflow:scroll">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                              </tr>
+                            </thead>
+                            <tbody id="mytable">
+                            </tbody>
+                          </table>
+                    </pre>
                     <button onclick="main()">Hide 0's</button>
                 </div>
                 <div class="col-md-8">
