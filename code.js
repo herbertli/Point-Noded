@@ -12,10 +12,10 @@ var graphEdges = null;
 var network = null;
 
 function destroy() {
-  if (network !== null) {
-    network.destroy();
-    network = null;
-  }
+    if (network !== null) {
+        network.destroy();
+        network = null;
+    }
 }
 
 /**
@@ -33,10 +33,9 @@ function main() {
         graphNodes.push({
             id: data_nodes[i].id,
             instrumentList: [],
-            value: 0,
             label: data_nodes[i].name,
-            val: round(0.00, 2),
-            title: ''
+            value: round(0.00, 2),
+            title: '',
         });
     }
 
@@ -52,12 +51,9 @@ function main() {
             to: data_edges[i].toNodeId,
             arrows: 'to',
             id: data_edges[i].id,
-            label: "",
             instrumentList: [],
-            val: round(0.00, 2),
-            font: {
-                align: 'middle',
-            }
+            value: round(0.00, 2),
+            title: '',
         });
     }
 
@@ -78,15 +74,14 @@ function main() {
     // Get total value of each node
     for(i = 0; i < graphNodes.length; i++){
         for(k = 0; k < graphNodes[i].instrumentList.length; k++){
-            graphNodes[i].value+=(graphNodes[i].instrumentList[k] * instruments[k].price);
-            graphNodes[i].val+=round((graphNodes[i].instrumentList[k] * instruments[k].price),2);
+            graphNodes[i].value+=round((graphNodes[i].instrumentList[k] * instruments[k].price),2);
         }
     }
 
     // Get total value of each edge
     for(i = 0; i < graphEdges.length; i++){
         for(k = 0; k < graphEdges[i].instrumentList.length; k++){
-            graphEdges[i].val+=round((graphEdges[i].instrumentList[k] * instruments[k].price),2);
+            graphEdges[i].value+=round((graphEdges[i].instrumentList[k] * instruments[k].price),2);
         }
     }
 
@@ -110,11 +105,11 @@ function main() {
     }
 
     for( i =0; i < graphNodes.length; i++){
-        graphNodes[i].title =  graphNodes[i].val;
+        graphNodes[i].title =  graphNodes[i].value;
     }
 
     for( i =0; i < graphNodes.length; i++){
-        graphEdges[i].title =  graphEdges[i].val;
+        graphEdges[i].title =  graphEdges[i].value;
     }
 
     // create a network
@@ -132,7 +127,7 @@ function main() {
           hoverConnectedEdges: true,
           tooltipDelay: 10
         },
-        nodes:{
+        nodes: {
             scaling: {
                 min: min_node,
                 max: max_node,
@@ -146,36 +141,21 @@ function main() {
                 customScalingFunction: function (min,max,total,value) {
                     var scale = 1 / (max - min);
                     console.log(Math.max(0, (value - min)*scale))
-                    return Math.max(0, (value)*scale);
+                    return Math.max(0, (value - min)*scale);
                 }
             },
             shape: 'circle'
         },
-        edges:{
-            label: {
-                enabled: false,
-                min: 14,
-                max: 30,
-                maxVisible: 30,
-                drawThreshold: 5
-            },
-            scaling:{
-                min: min_edge,
-                max: max_edge,
-                customScalingFunction: function (min,max,total,value) {
-                    var scale = 1 / (max - min);
-                    return Math.max(0, (value - min)*scale);
-                }
-              },
-            },
-
+        edges: {
+            arrowStrikethrough: false,
+        }
     }
 
     var network = new vis.Network(container, data, options);
     // add event listeners
-      network.on('select', function(params) {
+    network.on('select', function(params) {
         document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
-      });
+    });
 }
 
 
