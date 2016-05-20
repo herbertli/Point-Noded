@@ -7,10 +7,23 @@ var height = 500;
 var linkDistance = 200;
 var nodeRadius = 20;
 
+var graphNodes = null;
+var graphEdges = null;
+var network = null;
+
+function destroy() {
+  if (network !== null) {
+    network.destroy();
+    network = null;
+  }
+}
+
 /**
 * Main function
 */
 function main() {
+
+    destroy();
 
     var graphNodes = [];
     var graphEdges = [];
@@ -43,8 +56,7 @@ function main() {
             val: round(0.00, 2),
             font: {
                 align: 'middle',
-            },
-            title: 'hi'
+            }
         });
     }
 
@@ -112,6 +124,10 @@ function main() {
     };
 
     var options = {
+        interaction: {
+          navigationButtons: true,
+          keyboard: true
+        },
         nodes:{
             scaling: {
                 min: min_node,
@@ -133,7 +149,7 @@ function main() {
         },
         edges:{
             label: {
-                enabled: true,
+                enabled: false,
                 min: 14,
                 max: 30,
                 maxVisible: 30,
