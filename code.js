@@ -186,7 +186,8 @@ function main() {
                       instrumentDetail:instrumentDisplay
                     }
 
-        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + JSON.stringify(print_info, null, 4);
+        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + "Node Id: "+id+"\n"+"Node Name: " + n.name
+        +"\n"+"instrumentList:" + JSON.stringify(instrumentDisplay,null,4);
     });
 }
 
