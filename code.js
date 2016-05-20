@@ -127,7 +127,10 @@ function main() {
     var options = {
         interaction: {
           navigationButtons: true,
-          keyboard: true
+          keyboard: true,
+          hover: true,
+          hoverConnectedEdges: true,
+          tooltipDelay: 10
         },
         nodes:{
             scaling: {
@@ -166,15 +169,13 @@ function main() {
               },
             },
 
-        interaction: {
-            hover: true,
-            hoverConnectedEdges: true,
-            tooltipDelay: 10
-        }
     }
 
     var network = new vis.Network(container, data, options);
-
+    // add event listeners
+      network.on('select', function(params) {
+        document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
+      });
 }
 
 
