@@ -34,6 +34,7 @@ function main() {
             id: data_nodes[i].id,
             instrumentList: [],
             label: data_nodes[i].name,
+            name: data_nodes[i].name,
             value: round(0.00),
             title: '',
         });
@@ -181,7 +182,7 @@ function main() {
         }
 
         print_info = {id: id,
-                      name: n.lable,
+                      name: n.name,
                       instrumentDetail:instrumentDisplay
                     }
 
