@@ -113,7 +113,7 @@ function main() {
         graphNodes[i].title =  graphNodes[i].val;
     }
 
-    for( i =0; i < graphNodes.length; i++){
+    for( i =0; i < graphEdges.length; i++){
         graphEdges[i].title =  graphEdges[i].val;
     }
 
@@ -126,13 +126,14 @@ function main() {
 
     var options = {
         interaction: {
-          navigationButtons: true,
-          keyboard: true,
-          hover: true,
-          hoverConnectedEdges: true,
-          tooltipDelay: 10
+            navigationButtons: true, 
+           //    keyboard: true, 
+            hover: true, 
+            hoverConnectedEdges: true, 
+            tooltipDelay: 10
         },
-        nodes:{
+
+        nodes: {
             scaling: {
                 min: min_node,
                 max: max_node,
@@ -145,31 +146,26 @@ function main() {
                 },
                 customScalingFunction: function (min,max,total,value) {
                     var scale = 1 / (max - min);
-                    console.log(Math.max(0, (value - min)*scale))
+                    //console.log(Math.max(0, (value - min)*scale))
                     return Math.max(0, (value)*scale);
                 }
             },
+
             shape: 'circle'
         },
-        edges:{
-            label: {
-                enabled: false,
-                min: 14,
-                max: 30,
-                maxVisible: 30,
-                drawThreshold: 5
-            },
-            scaling:{
+
+        edges: {
+            scaling: {
                 min: min_edge,
                 max: max_edge,
                 customScalingFunction: function (min,max,total,value) {
                     var scale = 1 / (max - min);
                     return Math.max(0, (value - min)*scale);
                 }
-              },
-            },
+            }
+        }
 
-    }
+    };
 
     var network = new vis.Network(container, data, options);
     // add event listeners
