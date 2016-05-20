@@ -171,9 +171,18 @@ function main() {
         console.log(n);
         console.log(n.lable);
 
+
+        var instrumentDisplay={};
+
+        for(i=0;i<n.instrumentList.length;i++){
+          if(n.instrumentList[i]!=0){
+            instrumentDisplay[i]=n.instrumentList[i];
+          }
+        }
+
         print_info = {id: id,
                       name: n.lable,
-                      instrumentList:n.instrumentList
+                      instrumentDetail:instrumentDisplay
                     }
 
         document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + JSON.stringify(print_info, null, 4);
