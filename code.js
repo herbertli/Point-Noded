@@ -36,7 +36,7 @@ function main() {
             value: 0,
             label: data_nodes[i].name,
             val: round(0.00, 2),
-            title: 'hi'
+            title: ''
         });
     }
 
@@ -52,6 +52,7 @@ function main() {
             to: data_edges[i].toNodeId,
             arrows: 'to',
             id: data_edges[i].id,
+            label: "",
             instrumentList: [],
             val: round(0.00, 2),
             font: {
