@@ -168,27 +168,25 @@ function main() {
         params.event = "[original event]";
         id = params.nodes[0]
         n = (graphNodes.find(x=> x.id  === id));
-        console.log(id);
-        console.log(n);
-        console.log(n.lable);
 
+        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>'+"<br" + "Node Id: "+id+"\n"+"Node Name: " + n.name
+        +"\n";
 
-        var instrumentDisplay={};
-
+        document.getElementById('eventSpan').innerHTML += "Instrument ID\t" + "Quantity"+"\t"+"Price"+"\t\t\t"+"Total"+"\n";
+        total = 0
         for(i=0;i<n.instrumentList.length;i++){
           if(n.instrumentList[i]!=0){
-            instrumentDisplay[i]=n.instrumentList[i];
+            total += n.instrumentList[i]*instruments[i].price;
+            document.getElementById('eventSpan').innerHTML += i+"\t\t" + n.instrumentList[i] +"\t\t"+instruments[i].price+"\t\t"+n.instrumentList[i]*instruments[i].price+"\n";
           }
         }
 
-        print_info = {id: id,
-                      name: n.name,
-                      instrumentDetail:instrumentDisplay
-                    }
+        document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
 
-        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + "Node Id: "+id+"\n"+"Node Name: " + n.name
-        +"\n"+"instrumentList:" + JSON.stringify(instrumentDisplay,null,4);
+
+
     });
+
 }
 
 
