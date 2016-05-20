@@ -121,8 +121,8 @@ function main() {
 
     var options = {
         interaction: {
-            navigationButtons: true,
-           //    keyboard: true,
+            navigationButtons: false,
+            keyboard: true,
             hover: true,
             hoverConnectedEdges: true,
             tooltipDelay: 10
@@ -140,7 +140,6 @@ function main() {
                 },
                 customScalingFunction: function (min,max,total,value) {
                     var scale = 1 / (max - min);
-                    console.log(Math.max(0, (value - min)*scale))
                     return Math.max(0, (value - min)*scale);
                 }
             },
