@@ -19,7 +19,8 @@ function destroy() {
 }
 
 var zero_hidden = false;
-var group_options = ['hr', 'tech', 'finance'];
+//var group_options = ['hr', 'tech', 'finance'];
+
 /**
 * Main function
 */
@@ -41,7 +42,7 @@ function main() {
             title: '',
             x: data_nodes[i].x,
             y: data_nodes[i].y,
-            group: group_options[Math.floor(Math.random() * (group_options.length))],
+        //    group: group_options[Math.floor(Math.random() * (group_options.length))],
         });
     }
 
@@ -194,7 +195,7 @@ function main() {
         physics: {
             enabled: true,
         },
-        groups: {
+    /*    groups: {
           tech: {
             shape: 'icon',
             icon: {
@@ -223,6 +224,7 @@ function main() {
             }
           }
         }
+        */
     };
 
     var network = new vis.Network(container, data, options);
