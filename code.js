@@ -18,6 +18,7 @@ function destroy() {
     }
 }
 
+var zero_hidden = false;
 /**
 * Main function
 */
@@ -37,6 +38,8 @@ function main() {
             name: data_nodes[i].name,
             value: round(0.00),
             title: '',
+            x: data_nodes[i].x,
+            y: data_nodes[i].y,
         });
     }
 
@@ -105,6 +108,7 @@ function main() {
             max_edge = graphEdges[i].value;
     }
 
+    // Set popup value and color
     for( i =0; i < graphNodes.length; i++){
         graphNodes[i].title =  graphNodes[i].value;
     }
@@ -113,15 +117,32 @@ function main() {
         graphEdges[i].title =  graphEdges[i].value;
     }
 
-    for( i = 0; i < graphEdges.length; i++){
-        if(graphEdges[i].value == 0)
-            graphEdges[i].hidden = true;
-    }
-
-    for(i = 0; i < graphNodes.length; i++){
-        if(graphNodes[i].value == 0){
-            graphNodes[i].hidden = true;
+    // Hide edges with 0 value
+    if(zero_hidden) {
+        for( i = 0; i < graphEdges.length; i++){
+            if(graphEdges[i].value == 0)
+                graphEdges[i].hidden = false;
         }
+
+        for(i = 0; i < graphNodes.length; i++){
+            if(graphNodes[i].value == 0){
+                graphNodes[i].hidden = false;
+            }
+        }
+        zero_hidden = false;
+    }
+    else {
+        for( i = 0; i < graphEdges.length; i++){
+            if(graphEdges[i].value == 0)
+                graphEdges[i].hidden = true;
+        }
+
+        for(i = 0; i < graphNodes.length; i++){
+            if(graphNodes[i].value == 0){
+                graphNodes[i].hidden = true;
+            }
+        }
+        zero_hidden = true;
     }
 
     // create a network
@@ -155,10 +176,19 @@ function main() {
                     return Math.max(0, (value - min)*scale);
                 }
             },
-            shape: 'circle'
+            shape: 'circle',
+            borderWidth: 0,
         },
         edges: {
+            smooth: {
+                enabled: true,
+                type: 'dynamic',
+            },
             arrowStrikethrough: false,
+            shadow: false,
+        },
+        physics: {
+            enabled: false,
         }
     };
 
@@ -188,8 +218,8 @@ function main() {
 
         document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>' + JSON.stringify(print_info, null, 4);
     });
-}
 
+}
 
 
 function round(value) {
