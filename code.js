@@ -213,7 +213,6 @@ function main() {
         id = params.edges[0];
 
         n = (graphEdges.find(x=> x.id  === id));
-        console.log(n);
         document.getElementById('eventSpan').innerHTML = '<h2>Edge Detail:</h2>'+"<br>" + "Edge Id: "+id+"\n"+"From Node: " + n.from + "\n"+"To Node: " +n.to + "\n";
         +"\n";
       }
@@ -221,15 +220,16 @@ function main() {
       total = 0
       for(i=0;i<n.instrumentList.length;i++){
         if(n.instrumentList[i]!=0){
-          total += n.instrumentList[i]*instruments[i].price;
-          document.getElementById('eventSpan').innerHTML += i+"\t\t" + n.instrumentList[i] +"\t\t"+instruments[i].price+"\t\t"+n.instrumentList[i]*instruments[i].price+"\n";
+          total += round(n.instrumentList[i]*instruments[i].price);
+          document.getElementById('eventSpan').innerHTML += i+"\t\t" + n.instrumentList[i] +"\t\t"+round(instruments[i].price)+"\t\t"+round(n.instrumentList[i]*instruments[i].price)+"\n";
         }
       }
       document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
     });
+    console.log(document.getElementById('eventSpan'));
 }
 
 
 function round(value) {
-    return Math.round(value*100)/100;
+    return (Math.round(value*100)/100);
 }
