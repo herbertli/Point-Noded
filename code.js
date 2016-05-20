@@ -196,29 +196,36 @@ function main() {
 
     var network = new vis.Network(container, data, options);
     network.fit();
+
+    //display node Details
     network.on("click", function (params) {
+      //if it's on a node
+      if(params.nodes[0]){
         params.event = "[original event]";
         id = params.nodes[0]
         n = (graphNodes.find(x=> x.id  === id));
-
-        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>'+"<br" + "Node Id: "+id+"\n"+"Node Name: " + n.name
+        document.getElementById('eventSpan').innerHTML = '<h2>Node Detail:</h2>'+"<br>" + "Node Id: "+id+"\n"+"Node Name: " + n.name
         +"\n";
-        total = 0;
-        for(i=0;i<n.instrumentList.length;i++){
-          if(n.instrumentList[i]!=0){
-            total += round(n.instrumentList[i]*instruments[i].price);
-            console.log(document.getElementById('mytable'));
-            document.getElementById('mytable').innerHTML =  "<tr>   \
-            <td>" + n.instrumentList[i] + "</td>\
-            <td>" + round(instruments[i].price) + "</td> \
-            <td>"+round(n.instrumentList[i]*instruments[i].price)+"</td> \
-            </tr>";
-          }
+      }
+      //if it's on an edge
+      else if(params.edges[0]){
+        console.log(params);
+        id = params.edges[0];
+
+        n = (graphEdges.find(x=> x.id  === id));
+        console.log(n);
+        document.getElementById('eventSpan').innerHTML = '<h2>Edge Detail:</h2>'+"<br>" + "Edge Id: "+id+"\n"+"From Node: " + n.from + "\n"+"To Node: " +n.to + "\n";
+        +"\n";
+      }
+      document.getElementById('eventSpan').innerHTML += "Instrument ID\t" + "Quantity"+"\t"+"Price"+"\t\t\t"+"Total"+"\n";
+      total = 0
+      for(i=0;i<n.instrumentList.length;i++){
+        if(n.instrumentList[i]!=0){
+          total += n.instrumentList[i]*instruments[i].price;
+          document.getElementById('eventSpan').innerHTML += i+"\t\t" + n.instrumentList[i] +"\t\t"+instruments[i].price+"\t\t"+n.instrumentList[i]*instruments[i].price+"\n";
         }
-    //    document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
-
-
-
+      }
+      document.getElementById('eventSpan').innerHTML += "<br>"+"<b>Total</b>:" + total;
     });
 }
 

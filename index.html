@@ -51,6 +51,19 @@
       background-color: white;
       border: none;
     }
+
+    #button{
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
     </style>
 
     <body id="page-top" class="index" onload="main()">
@@ -75,13 +88,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#Herbert">Herbert</a>
+                        <a href="https://github.com/herbertli/">Herbert</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#Hanming">Hanming</a>
+                        <a href="http://www.hanmingzeng.com/">Hanming</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#Kirs">Kris</a>
+                        <a href="https://www.facebook.com/krishna.thiyagarjan">Krishna</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
@@ -101,21 +114,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <pre id="eventSpan" style="overflow:scroll">
-                        <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th>ID</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                              </tr>
-                            </thead>
-                            <tbody id="mytable">
-                            </tbody>
-                          </table>
-                    </pre>
-                    <button onclick="main()">Hide 0's</button>
+                    <pre id="eventSpan" style="overflow:scroll"><h2>Info Display</h2></pre>
+                    <button id = "button" onclick="main()">Hide/Show 0's</button>
                 </div>
                 <div class="col-md-8">
                     <div id="mynetwork"></div>
@@ -135,10 +135,14 @@
                     <hr class="star-primary">
                 </div>
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Point Noded is a [to be implemented]</p>
+                    <p>PointNoded is a web application that visualizes the trades between internal sectors of Credit Suisse.
+                      The application was developed by Krishna Thiyagarajan, Herbert Li and Hanming Zeng.
+                      The web application uses JSON formatted data with trade information between sectors and arranges them in an orderly manner.
+                      </p>
                 </div>
                 <div class="col-lg-4">
-                    <p>[to be implemented]</p>
+                    <p>PointNoded was designed with the fact the users using this will be utlizing this data to view it quickly and effectively so that they can make good decisions on trades.
+                    This was accomplished using the vis.js runtime environment along with the javascript language.</p>
                 </div>
             </div>
         </div>
